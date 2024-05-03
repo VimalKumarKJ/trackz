@@ -1,0 +1,51 @@
+<%- include('partials/header.ejs'); -%>
+<body>
+    <main>
+        <div class="container-fluid my-3">
+            <h1 class="display-3">Notes</h1>
+            <div class="container-fluid mx-2">
+                <div class="row row-cols-1 row-cols-md-2 g-4 mx-5">
+                    <% for(note of notes){ %>
+                    <div class="col my-3">
+                        <div class="card d-flex card-styles text-white my-2 mx-sm-1 px-1">
+                            <form method="post" action="/edit">
+                                <div class="card-body mx-3 my-3">
+                                    <input type="hidden" name="updatedNoteId" value="<%= note.id %>">
+                                    <textarea class="form-control" id="updatedform" rows="3" name="updatedNote" placeholder="Write here....."><%= note.body %></textarea>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div class="btn-group" role="group" aria-label="Note Actions">
+                                        <button class="btn btn-outline-light checkbtn" type="submit" name="action" value="delete">🗑️</button>
+                                        <button class="btn btn-outline-light checkbtn" type="submit" name="action" value="update">✓</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="col my-3">
+                        <div class="card d-flex card-styles text-white my-2 mx-sm-1 px-1">
+                            <form method="post" action="/post">
+                                <div class="card-body mx-3 my-3">
+                                    <textarea class="form-control" id="newNoteTextarea" rows="3" name="newNote" placeholder="Write here....." required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-light checkbtn" type="submit" name="note" value=<%= %>>+</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <script>
+            function validateNewNote() {
+                var newNoteTextarea = document.getElementById('newNoteTextarea');
+                if (newNoteTextarea.value.trim() === '') {
+                    alert('You cannot add an empty note!');
+                    return false;
+                }
+                return true;
+            }
+        </script> -->
